@@ -1,3 +1,4 @@
-/admin/*
-/prod/*
+admin/*
+prod/*
 mysql
+.idea
