@@ -6,8 +6,8 @@ services:
       dockerfile: ./docker/prod/Dockerfile
     ports:
       - 8081:80
-    labels:
-      - "traefik.http.routers.app.rule=Host(`app.localhost`)"
+    #labels:
+    #  - "traefik.http.routers.app.rule=Host(`app.localhost`)"
     volumes:
       - ./prod:/var/www/html/
       - ./docker/prod/000-default.conf:/etc/apache/site-enabled/000-default.conf
@@ -19,52 +19,51 @@ services:
       dockerfile: ./docker/admin/Dockerfile
     ports:
       - 8082:80
-    labels:
-      - "traefik.http.routers.admin.rule=Host(`admin.localhost`)"
+    #labels:
+    #  - "traefik.http.routers.admin.rule=Host(`admin.localhost`)"
     volumes:
       - ./admin:/var/www/html/
       - ./docker/admin/000-default.conf:/etc/apache/site-enabled/000-default.conf
     networks:
       - default
 
-  mysql:
-    image: mariadb
-    restart: always
-    tty: true
-    ports:
-      - "3306:3306"
-    environment:
-      MARIADB_DATABASE: apachedb_dev
-      MARIADB_USER: apachedb_user
-      MARIADB_PASSWORD: password
-      MARIADB_ROOT_PASSWORD: password
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
-    volumes:
-      - ./dump:/docker-entrypoint-initdb.d
-      - ./mysql:/var/lib/mysql
-    networks:
-      - default
+  # mysql:
+  #   image: mariadb
+  #   restart: always
+  #   ports:
+  #     - "3306:3306"
+  #   environment:
+  #     MARIADB_DATABASE: apachedb_dev
+  #     MARIADB_USER: apachedb_user
+  #     MARIADB_PASSWORD: password
+  #     MARIADB_ROOT_PASSWORD: password
+  #     SERVICE_TAGS: dev
+  #     SERVICE_NAME: mysql
+  #   volumes:
+  #     - ./dump:/docker-entrypoint-initdb.d
+  #     - ./mysql:/var/lib/mysql
+  #   networks:
+  #     - default
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    restart: always
-    environment:
-      - PMA_ARBITRARY=1
-    links:
-      - mysql
-    ports:
-      - 8085:80
-    volumes:
-      - /sessions
-    networks:
-      - default
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin
+  #   restart: always
+  #   environment:
+  #     - PMA_ARBITRARY=1
+  #   links:
+  #     - mysql
+  #   ports:
+  #     - 8085:80
+  #   volumes:
+  #     - /sessions
+  #   networks:
+  #     - default
 
-  traefik:
-    image: traefik:v2.9
-    command: --api.insecure=true --providers.docker
-    ports:
-      - "80:80"
-      - "8080:8080"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+  # traefik:
+  #   image: traefik:v2.9
+  #   command: --api.insecure=true --providers.docker
+  #   ports:
+  #     - "80:80"
+  #     - "8080:8080"
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
