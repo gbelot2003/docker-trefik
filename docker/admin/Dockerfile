@@ -40,13 +40,15 @@ RUN set -eux; \
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+RUN a2enmod rewrite
+
 WORKDIR /var/www
 
 RUN mkdir ./.composer
 
 RUN chmod -R 777 .composer
 
-WORKDIR /var/www/html
+WORKDIR /var/www/html/public
 
 # Add UID '1000' to www-data
 RUN usermod -u 1000 www-data

@@ -12,7 +12,8 @@ services:
       - mysql
     volumes:
       - ./prod:/var/www/html/
-      - ./docker/prod/000-default.conf:/etc/apache/site-enabled/000-default.conf
+      - ./docker/prod/000-default.conf:/etc/apache2/site-enabled/000-default.conf
+      - ./docker/prod/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
     networks:
       - default
 
@@ -27,7 +28,7 @@ services:
       - mysql
     volumes:
       - ./admin:/var/www/html/
-      - ./docker/admin/000-default.conf:/etc/apache/site-enabled/000-default.conf
+      - ./docker/admin/000-default.conf:/etc/apache2/site-enabled/000-default.conf
     networks:
       - default
 
