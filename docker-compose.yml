@@ -8,12 +8,9 @@ services:
       - 8081:80
     labels:
      - "traefik.http.routers.app.rule=Host(`app.localhost`)"
-    links:
-      - mysql
     volumes:
       - ./prod:/var/www/html/
       - ./docker/prod/000-default.conf:/etc/apache2/site-enabled/000-default.conf
-      - ./docker/prod/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
     networks:
       - default
 
@@ -24,8 +21,6 @@ services:
       - 8082:80
     labels:
      - "traefik.http.routers.admin.rule=Host(`admin.localhost`)"
-    links:
-      - mysql
     volumes:
       - ./admin:/var/www/html/
       - ./docker/admin/000-default.conf:/etc/apache2/site-enabled/000-default.conf
