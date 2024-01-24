@@ -8,7 +8,6 @@ services:
       - 8081:80
     labels:
      - "traefik.http.routers.app.rule=Host(`app.localhost`)"
-     - "traefik.http.routers.admin.rule=Host(`app.sufacturasa.com`)"
 
     volumes:
       - ./prod:/var/www/html/
@@ -23,7 +22,6 @@ services:
       - 8082:80
     labels:
      - "traefik.http.routers.admin.rule=Host(`admin.localhost`)"
-     - "traefik.http.routers.admin.rule=Host(`admin.sufacturasa.com`)"
     volumes:
       - ./admin:/var/www/html/
       - ./docker/admin/000-default.conf:/etc/apache2/site-enabled/000-default.conf

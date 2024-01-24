@@ -38,6 +38,8 @@ RUN set -eux; \
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+RUN a2enmod rewrite
+
 WORKDIR /var/www
 
 RUN mkdir ./.composer
